@@ -19,7 +19,7 @@ public class Biography extends Book
     }
 
     /*
-    Checks to see if the subject is null or empty. Throws IllegalArgumentException if invalid.
+    Checks to see if the subject is null or empty. Throws Il
      */
     private static void validateSubject(final String subject)
     {
@@ -29,8 +29,28 @@ public class Biography extends Book
         }
     }
 
-    @Override public boolean equals(final Object that)
+    /**
+     * Returns the subject of this object.
+     * @return subject of this object
+     */
+    public String getSubject()
     {
-        if (that == null || that)
+        return this.subject;
+    }
+
+    /**
+     * Two Biographies are equal if they have the same subject.
+     * @param that Biography being compared to this
+     * @return true if equals, false if not
+     */
+    @Override
+    public boolean equals(final Object that)
+    {
+        if (that == null || !(that instanceof Biography))
+        {
+            return false;
+        }
+
+        return this.getSubject().equals(((Biography) that).getSubject());
     }
 }

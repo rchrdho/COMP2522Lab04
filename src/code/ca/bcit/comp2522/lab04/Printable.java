@@ -11,11 +11,13 @@ package ca.bcit.comp2522.lab04;
  */
 public interface Printable
 {
-    default void display()
-    {
 
     /**
      * Prints a string of relevant details about the object.
      */
-    void display();
+    default void display()
+    {
+
+
+    }
 }

@@ -1,5 +1,7 @@
 package ca.bcit.comp2522.lab04;
 
+import static org.apache.commons.lang3.StringUtils.reverse;
+
 /**
  * @TODO validators for Data members
  */
@@ -58,20 +60,61 @@ public class Book implements Comparable<Book>,
         }
     }
 
-    @Override
-    public int compareTo(Book o) {
-        return 0;
-    }
-
-    public String getBookTitle() {
+    public String getBookTitle()
+    {
         return bookTitle;
     }
 
-    public int getYearPublished() {
+    public int getYearPublished()
+    {
         return yearPublished;
     }
 
-    public Author getAuthor() {
+    public Author getAuthor()
+    {
         return author;
     }
+
+    @Override
+    public int compareTo(final Book that)
+    {
+        if (this.yearPublished < that.yearPublished)
+        {
+            return 1;
+        }
+
+        if (this.yearPublished > that.yearPublished)
+        {
+            return -1;
+        }
+
+        return 0;
+    }
+
+    @Override
+    public void display()
+    {
+        final StringBuilder bob;
+
+        bob = new StringBuilder();
+
+        bob.append(bookTitle + "\n");
+        bob.append(author + "\n");
+        bob.append(yearPublished + "\n");
+
+        System.out.println(bob);
+    }
+
+    @Override
+    public void backward()
+    {
+        final StringBuilder bob;
+
+        bob = new StringBuilder();
+
+        bob.append(reverse(bookTitle));
+
+        System.out.println(bob);
+    }
+
 }
