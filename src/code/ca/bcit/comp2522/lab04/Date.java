@@ -1,7 +1,4 @@
-import java.awt.*;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
+package ca.bcit.comp2522.lab04;
 
 /**
  * Date class that must allow only years between
@@ -12,11 +9,12 @@ import java.awt.print.PrinterException;
  * individually. A method that can calculate the exact day of the week, ie: WEDNESDAY. Helper methods are implemented
  * to determine a leap year to calculate the number of days for the month
  *
- * @author Richard Ho
- * @author Jayden Hutchinson
+ * @author  Richard Ho
+ * @author  Jayden Hutchinson
+ * @author  Bryson Lindy
  * @version 2.0
  */
-public class Date implements Printable
+public class Date
 {
     // symbolic constants
     static final int MIN_NUM_YEARS             = 1800;
@@ -374,12 +372,5 @@ public class Date implements Printable
         System.out.println(date.getMonth());
         System.out.println(date.getYear());
 
-    }
-
-    @Override
-    public int print(Graphics graphics,
-                     PageFormat pageFormat,
-                     int pageIndex) throws PrinterException {
-        return 0;
     }
 }

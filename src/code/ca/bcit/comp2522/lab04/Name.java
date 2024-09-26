@@ -1,9 +1,6 @@
-import org.apache.commons.lang3.StringUtils;
+package ca.bcit.comp2522.lab04;
 
-import java.awt.*;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Name class.
@@ -13,9 +10,10 @@ import java.awt.print.PrinterException;
  * Contains methods that will return the initials, full name and reverse
  * the name input.
  *
- * @author Richard Ho
- * @author Jayden Hutchinson
- * @version 1.0
+ * @author  Richard Ho
+ * @author  Jayden Hutchinson
+ * @author  Bryson Lindy
+ * @version 2.0
  */
 public class Name implements Printable
 {
@@ -56,7 +54,10 @@ public class Name implements Printable
     private static void validateFirstName(final String firstName)
     {
         // if firstName is null, blank, or less than maximum length, throw exception
-        if(firstName == null || firstName.isBlank() || firstName.length() < MAX_NAME_LENGTH_CHARS || firstName.equalsIgnoreCase(ILLEGAL_STRING))
+        if(firstName == null ||
+                firstName.isBlank() ||
+                firstName.length() < MAX_NAME_LENGTH_CHARS ||
+                firstName.equalsIgnoreCase(ILLEGAL_STRING))
         {
             throw new IllegalArgumentException("Invalid first name entry");
         }
@@ -69,7 +70,10 @@ public class Name implements Printable
     private static void validateLastName(final String lastName)
     {
         // if lastName is null, blank, or less than MAX_NAME_LENGTH_CHARS, throw exception
-        if(lastName == null || lastName.isBlank() || lastName.length() < MAX_NAME_LENGTH_CHARS || lastName.equalsIgnoreCase(ILLEGAL_STRING))
+        if(lastName == null ||
+                       lastName.isBlank() ||
+                       lastName.length() < MAX_NAME_LENGTH_CHARS ||
+                       lastName.equalsIgnoreCase(ILLEGAL_STRING))
         {
             throw new IllegalArgumentException("Invalid last name entry");
         }
@@ -126,9 +130,13 @@ public class Name implements Printable
         fullName = new StringBuilder();
 
         // creates a string of the first and last name with capital first letter and lower case for the rest
-        fullName.append(first.substring(FIRST_CHAR, SECOND_CHAR).toUpperCase() + first.substring(SECOND_CHAR, first.length()).toLowerCase()); // append first name with capital first letter and lower rest
+        fullName.append(first.substring(FIRST_CHAR, SECOND_CHAR).toUpperCase()
+                + first.substring(SECOND_CHAR, first.length()).toLowerCase()); // append first name with capital first letter and lower rest
+
         fullName.append(" "); // append space
-        fullName.append(last.substring(FIRST_CHAR, SECOND_CHAR).toUpperCase() + last.substring(SECOND_CHAR, last.length()).toLowerCase()); // append last name with capital first letter and lower rest
+
+        fullName.append(last.substring(FIRST_CHAR, SECOND_CHAR).toUpperCase()
+                + last.substring(SECOND_CHAR, last.length()).toLowerCase()); // append last name with capital first letter and lower rest
 
         return fullName.toString(); // return first and last name
     }
@@ -151,13 +159,5 @@ public class Name implements Printable
         return reversedName.toString(); // return full reversed name
     }
 
-    @Override
-    public int print(Graphics graphics,
-                     PageFormat pageFormat,
-                     int pageIndex)
-            throws PrinterException
-    {
-        return 0;
-    }
 
 }
