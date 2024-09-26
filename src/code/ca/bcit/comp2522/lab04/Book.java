@@ -12,14 +12,21 @@ public class Book implements Comparable<Book>,
     private static final int MIN_YEAR        = 1;
 
     private final String bookTitle;
-    private final int    yearPublished;
     private final Author author;
+    private final int    yearPublished;
 
+    /**
+     *
+     * @param title
+     * @param yearPublished
+     * @param author
+     */
     public Book(final String title,
                 final int    yearPublished,
                 final Author author)
     {
         validateTitle(title);
+        validateYearPublished(yearPublished);
         validateAuthor(author);
 
         this.bookTitle      = title;
