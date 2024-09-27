@@ -1,7 +1,5 @@
 package ca.bcit.comp2522.lab04;
 
-import static org.apache.commons.lang3.StringUtils.reverse;
-
 /**
  * @TODO validators for Data members
  */
@@ -26,6 +24,7 @@ public class Book implements Comparable<Book>,
     public Book(final String title,
                 final int    yearPublished,
                 final Author author)
+                throws IllegalArgumentException
     {
         validateTitle(title);
         validateYearPublished(yearPublished);
@@ -78,12 +77,12 @@ public class Book implements Comparable<Book>,
     @Override
     public int compareTo(final Book that)
     {
-        if (this.yearPublished < that.yearPublished)
+        if (this.getYearPublished() < that.getYearPublished())
         {
             return 1;
         }
 
-        if (this.yearPublished > that.yearPublished)
+        if (this.getYearPublished() > that.getYearPublished())
         {
             return -1;
         }
@@ -98,8 +97,8 @@ public class Book implements Comparable<Book>,
 
         bob = new StringBuilder();
 
-        bob.append(bookTitle + "\n");
-        bob.append(author + "\n");
+        bob.append(bookTitle     + "\n");
+        bob.append(author        + "\n");
         bob.append(yearPublished + "\n");
 
         System.out.println(bob);
@@ -112,7 +111,7 @@ public class Book implements Comparable<Book>,
 
         bob = new StringBuilder();
 
-        bob.append(reverse(bookTitle));
+        bob.append(bookTitle).reverse();
 
         System.out.println(bob);
     }

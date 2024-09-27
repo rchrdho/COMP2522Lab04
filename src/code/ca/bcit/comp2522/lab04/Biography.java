@@ -8,7 +8,7 @@ public class Biography extends Book
     private final String subject;
 
     public Biography(final String title,
-                     final int yearPublished,
+                     final int    yearPublished,
                      final Author author,
                      final String subject)
                      throws IllegalArgumentException

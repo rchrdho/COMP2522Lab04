@@ -1,6 +1,5 @@
 package ca.bcit.comp2522.lab04;
 
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Name class.
@@ -152,11 +151,11 @@ public class Name implements Printable
         final StringBuilder reversedName;
         reversedName = new StringBuilder();
 
-        reversedName.append(StringUtils.reverse(last)); // append last name
+        reversedName.append(first); // append last name
         reversedName.append(" "); // append a space
-        reversedName.append(StringUtils.reverse(first)); // append first name
+        reversedName.append(last); // append first name
 
-        return reversedName.toString(); // return full reversed name
+        return reversedName.reverse().toString(); // return full reversed name
     }
 
 
