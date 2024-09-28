@@ -1,5 +1,7 @@
 package ca.bcit.comp2522.lab04;
 
+import java.util.Objects;
+
 /**
  * Provides the name, birthdate, and death date [can be null]
  * Will print out a String giving the person's name their status [alive/dead with full date], and their full birth date.
@@ -16,10 +18,6 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
     private final Name name;
     private final Date birthDate;
     private final Date deathDate;
-
-    // symbolic constants
-    private static final String ALIVE_STATUS = "alive";
-    private static final String DEATH_STATUS = "died";
 
     // integer values of each month of the year
     private static final int JANUARY   = 1;
@@ -49,26 +47,6 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
         this.name      = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
-    }
-
-    /**
-     * Gets the details of the client formatted.
-     * Will provide it as NAME + STATUS [alive/dead with full date] + was born on + DAY(name), MONTH DAY(integer) +
-     * YEAR
-     *
-     * @return Full Name (alive/died + date) was born DAY, MONTH DATE, YEAR
-     */
-    public String getDetails()
-    {
-        // Builds a string based on whether the person is alive or dead
-        // Either alive, or dead, in which case it will provide the DAY(name), MONTH DAY(integer), YEAR
-        final String status;
-        status = (deathDate == null) ? ALIVE_STATUS : DEATH_STATUS + " " + deathDate.getDayOfTheWeek() + ", "
-                + this.getMonthName(deathDate.getMonth()) + " " + deathDate.getDay() + ", " + deathDate.getYear();
-
-        // Concatenates the person's current dead or alive status with the person's birth date
-        return String.format("%s (%s) was born on %s, %s %02d, %d", name.getFullName(), status,
-                             birthDate.getDayOfTheWeek(), getMonthName(birthDate.getMonth()), birthDate.getDay(), birthDate.getYear());
     }
 
     /**
@@ -110,6 +88,47 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
     public int compareTo(final Person that)
     {
         return this.getBirthDate().getYear() - that.getBirthDate().getYear();
+    }
+
+    /**
+     * Compares this {@code Person} to the specified object.
+     *
+     * <p>This method checks for total equality between this {@code Person}
+     * and the provided object. Two {@code Person} objects are considered equal if
+     * and only if all of the following conditions hold:
+     * <ul>
+     *     <li>The specified object is not {@code null}.</li>
+     *     <li>The specified object is of the same class as this {@code Person}.</li>
+     *     <li>The {@code name}, {@code birthDate}, and {@code deathDate} fields of both
+     *     {@code Person} objects are equal.</li>
+     * </ul>
+     *
+     * <p>For the {@code deathDate} field, if both {@code Person} objects have a
+     * {@code null} value, they are considered equal for that field.
+     *
+     * @param that the object to compare this {@code Person} against
+     * @return {@code true} if the given object represents a {@code Person}
+     *         equivalent to this person, {@code false} otherwise
+     * @see #hashCode()
+     */
+    @Override
+    public boolean equals(final Object that)
+    {
+        if (!(that instanceof Person))
+        {
+            return false;
+        }
+
+        if (this == that)
+        {
+            return true;
+        }
+
+        Person thatPerson = (Person) that;
+
+        return  this.getName().equals(thatPerson.getName()) &&
+                this.getBirthDate().equals(thatPerson.getBirthDate()) &&
+                (Objects.equals(deathDate, thatPerson.deathDate));
     }
 
     /**

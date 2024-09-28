@@ -23,7 +23,7 @@ package ca.bcit.comp2522.lab04;
  *
  * @version 2.0
  */
-public class Date
+public class Date implements Printable
 {
     private static final int SATURDAY                       = 0;
     private static final int SUNDAY                         = 1;
@@ -53,8 +53,8 @@ public class Date
     private static final int MONTH_MAX                      = 12;
     private static final int MONTH_DAYS_31                  = 31;
     private static final int MONTH_DAYS_30                  = 30;
-    private static final int MONTH_DAYS_29                  = 29;
-    private static final int MONTH_DAYS_28                  = 28;
+    private static final int LONG_FEBRUARY                  = 29;
+    private static final int SHORT_FEBRUARY                 = 28;
 
     private static final int MONTH_CODE_0                   = 0;
     private static final int MONTH_CODE_1                   = 1;
@@ -183,6 +183,19 @@ public class Date
         }
     }
 
+    /**
+     * Displays the Date in the format
+     * Weekday, Month Day, Year
+     */
+    @Override
+    public void display()
+    {
+        System.out.printf("%s, %s %d, %d\n", this.getDayOfWeek(),
+                                           this.getMonthAsString(),
+                                           this.getDay(),
+                                           this.getYear());
+    }
+
     /*
     Switches the passed month against symbolic constants representing the months of the year. Returns the appropriate
     amount of days corresponding to month and status of leap year.
@@ -208,11 +221,11 @@ public class Date
             case FEBRUARY:
                 if (isLeapYear(year))
                 {
-                    return MONTH_DAYS_29;
+                    return LONG_FEBRUARY;
                 }
                 else
                 {
-                    return MONTH_DAYS_28;
+                    return SHORT_FEBRUARY;
                 }
             default:
                 throw new IllegalArgumentException("Invalid month: " + month);
@@ -255,7 +268,7 @@ public class Date
      * 5. Add the month code to weekCode according to the following table:
      *      Month        [ J F M A M J J A S O N D ]
      *      Month Code   [ 1 4 4 0 2 5 0 3 6 1 4 6 ]
-     *      October = O = 1                                 weekCode += 1
+     *      October (O)  = 1                                weekCode += 1
      *
      * 6. Final calculation:
      *      weekCode = 44
