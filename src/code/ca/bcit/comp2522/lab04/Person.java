@@ -74,7 +74,7 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
             System.out.printf("Death date: %s\n", this.getDeathDate());
         }
         System.out.printf("Birth date: %s\n", this.getBirthDate());
-        System.out.printf("Name: %s\n", this.getName());
+        System.out.printf("Name: %s\n",       this.getName());
     }
 
     /**

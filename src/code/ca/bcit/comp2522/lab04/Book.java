@@ -75,19 +75,39 @@ public class Book implements Comparable<Book>,
     }
 
     @Override
+    public boolean equals(final Object that)
+    {
+        if (!(that instanceof Book))
+        {
+            return false;
+        }
+
+        if (this == that)
+        {
+            return true;
+        }
+
+        final Book thatBook;
+
+        thatBook = (Book) that;
+
+        return this.bookTitle.equals(thatBook.bookTitle) &&
+                this.yearPublished == thatBook.yearPublished &&
+                this.author.equals(thatBook.author);
+    }
+
+    /**
+     * Compares this book's publish year to that book's publish year.
+     *
+     * @param that the object to be compared.
+     * @return +int when this is older than that
+     *         0 when this is the same age as that
+     *         -int when this is younger than that
+     */
+    @Override
     public int compareTo(final Book that)
     {
-        if (this.getYearPublished() < that.getYearPublished())
-        {
-            return 1;
-        }
-
-        if (this.getYearPublished() > that.getYearPublished())
-        {
-            return -1;
-        }
-
-        return 0;
+        return this.getYearPublished() - that.getYearPublished();
     }
 
     @Override
@@ -97,9 +117,9 @@ public class Book implements Comparable<Book>,
 
         bob = new StringBuilder();
 
-        bob.append(bookTitle     + "\n");
-        bob.append(author        + "\n");
-        bob.append(yearPublished + "\n");
+        bob.append(this.getBookTitle()     + "\n");
+        bob.append(this.getAuthor()        + "\n");
+        bob.append(this.getYearPublished() + "\n");
 
         System.out.println(bob);
     }
@@ -111,7 +131,9 @@ public class Book implements Comparable<Book>,
 
         bob = new StringBuilder();
 
-        bob.append(bookTitle).reverse();
+        bob.append(this.getYearPublished() + "\n");
+        bob.append(this.getAuthor()        + "\n");
+        bob.append(this.getBookTitle()     + "\n");
 
         System.out.println(bob);
     }
