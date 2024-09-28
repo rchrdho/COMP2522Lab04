@@ -1,87 +1,111 @@
 package ca.bcit.comp2522.lab04;
 
 /**
- * Date class that must allow only years between
  * <pre>
- * MIN_NUM_YEARS - CURRENT_YEAR; MIN_NUM_MONTHS - MAX_NUM_MONTHS, and MIN_NUM_DAYS - MAX_NUM_DAYS.
- * </pre>
- * This class has methods that will return you a formatted Date such as 2024-09-30 as well as each of those dates
- * individually. A method that can calculate the exact day of the week, ie: WEDNESDAY. Helper methods are implemented
- * to determine a leap year to calculate the number of days for the month
+ * The Date class represents a specific calendar date, including day, month, and year, with validation and leap year handling.
  *
- * @author  Richard Ho
- * @author  Jayden Hutchinson
- * @author  Bryson Lindy
+ * This class provides utility methods for:
+ * - Validating the day, month, and year for a Date object based on a range of valid dates (1800 to the current year).
+ * - Handling leap years in February.
+ * - Calculating the day of the week for any valid date.
+ * - Converting numeric representations of months into their string equivalents.
+ *
+ * The Date class relies on constants to represent day and month codes, month lengths,
+ * and adjustments required for week code calculations depending on leap years and century-specific rules.
+ *
+ * Example usage:
+ * Date date = new Date(1977, 10, 31);
+ * System.out.println(date.toString()); // Outputs: Monday, October 31, 1977
+ *</pre>
+ * @author Bryson Lindy
+ * @author Phyo Thu Kha
+ * @author Richard Ho
+ *
  * @version 2.0
  */
 public class Date
 {
-    // symbolic constants
-    static final int MIN_NUM_YEARS             = 1800;
-    static final int CURRENT_YEAR              = 2024;
-    static final int MIN_NUM_MONTHS            = 1;
-    static final int MAX_NUM_MONTHS            = 12;
-    static final int MIN_NUM_DAYS              = 1;
-    static final int MAX_NUM_DAYS              = 31;
-    static final int DAYS_IN_WEEK              = 7;
-    static final int DAYS_IN_OTHER_MONTHS      = 30; // days in April, June, September, November
-    static final int DAYS_IN_LONGER_FEBRUARY   = 29;
-    static final int DAYS_IN_SHORTER_FEBRUARY  = 28;
-    static final int YEAR_NINETEEN_HUNDREDS    = 1900;
-    static final int YEAR_TWO_THOUSANDS        = 2000;
-    static final int LEAP_YEAR_DIVISOR         = 4;
-    static final int NO_REMAINDER              = 0;
-    static final int CENTURY_DIVISOR           = 100;
-    static final int LEAP_YEAR_SPECIAL_DIVISOR = 400;
-    static final int CENTURY_OFFSET_MODIFIER   = 6;
-    static final int PRE_19TH_CENTURY_OFFSET   = 2;
-    static final int TWELVE_YEAR_PERIOD        = 12;
-    static final int FOUR_YEAR_PERIOD          = 4;
+    private static final int SATURDAY                       = 0;
+    private static final int SUNDAY                         = 1;
+    private static final int MONDAY                         = 2;
+    private static final int TUESDAY                        = 3;
+    private static final int WEDNESDAY                      = 4;
+    private static final int THURSDAY                       = 5;
+    private static final int FRIDAY                         = 6;
 
-    private static final int SATURDAY  = 0;
-    private static final int SUNDAY    = 1;
-    private static final int MONDAY    = 2;
-    private static final int TUESDAY   = 3;
-    private static final int WEDNESDAY = 4;
-    private static final int THURSDAY  = 5;
-    private static final int FRIDAY    = 6;
+    private static final int DAYS_IN_WEEK                   = 7;
+    private static final int DAY_MIN                        = 1;
 
-    private static final int JANUARY   = 1;
-    private static final int FEBRUARY  = 2;
-    private static final int MARCH     = 3;
-    private static final int APRIL     = 4;
-    private static final int MAY       = 5;
-    private static final int JUNE      = 6;
-    private static final int JULY      = 7;
-    private static final int AUGUST    = 8;
-    private static final int SEPTEMBER = 9;
-    private static final int OCTOBER   = 10;
-    private static final int NOVEMBER  = 11;
-    private static final int DECEMBER  = 12;
+    private static final int JANUARY                        = 1;
+    private static final int FEBRUARY                       = 2;
+    private static final int MARCH                          = 3;
+    private static final int APRIL                          = 4;
+    private static final int MAY                            = 5;
+    private static final int JUNE                           = 6;
+    private static final int JULY                           = 7;
+    private static final int AUGUST                         = 8;
+    private static final int SEPTEMBER                      = 9;
+    private static final int OCTOBER                        = 10;
+    private static final int NOVEMBER                       = 11;
+    private static final int DECEMBER                       = 12;
 
-    private static final int JANUARY_CODE   = 1;
-    private static final int FEBRUARY_CODE  = 4;
-    private static final int MARCH_CODE     = 4;
-    private static final int APRIL_CODE     = 0;
-    private static final int MAY_CODE       = 2;
-    private static final int JUNE_CODE      = 5;
-    private static final int JULY_CODE      = 0;
-    private static final int AUGUST_CODE    = 3;
-    private static final int SEPTEMBER_CODE = 6;
-    private static final int OCTOBER_CODE   = 1;
-    private static final int NOVEMBER_CODE  = 4;
-    private static final int DECEMBER_CODE  = 6;
+    private static final int MONTH_MIN                      = 1;
+    private static final int MONTH_MAX                      = 12;
+    private static final int MONTH_DAYS_31                  = 31;
+    private static final int MONTH_DAYS_30                  = 30;
+    private static final int MONTH_DAYS_29                  = 29;
+    private static final int MONTH_DAYS_28                  = 28;
 
-    private final int year;
-    private final int month;
-    private final int day;
+    private static final int MONTH_CODE_0                   = 0;
+    private static final int MONTH_CODE_1                   = 1;
+    private static final int MONTH_CODE_2                   = 2;
+    private static final int MONTH_CODE_3                   = 3;
+    private static final int MONTH_CODE_4                   = 4;
+    private static final int MONTH_CODE_5                   = 5;
+    private static final int MONTH_CODE_6                   = 6;
+
+    private static final int VALID_YEAR_MIN                 = 1800;
+
+    private static final int WEEK_CODE_LEAP_YEAR_ADJUSTOR   = 6;
+    private static final int WEEK_CODE_1800S_ADJUSTOR       = 2;
+    private static final int WEEK_CODE_2000S_ADJUSTOR       = 6;
+
+    private static final int DIVISIBLE_BY_FOUR_LEAP_YEAR    = 4;
+    private static final int DIVISIBLE_BY_100_LEAP_YEAR     = 100;
+    private static final int DIVISIBLE_BY_400_LEAP_YEAR     = 400;
+
+    private static final int MIN_YEAR_1800S                 = 1800;
+    private static final int MAX_YEAR_1800S                 = 1899;
+    private static final int MIN_YEAR_2000S                 = 2000;
+    private static final int MAX_YEAR_2000S                 = 2099;
 
     /**
-     * Constructs the date object.
+     * Constant representing the current year.
+     */
+    public static final int CURRENT_YEAR                    = 2024;
+    private static final int MONTHS_IN_YEAR                 = 12;
+    private static final int EXTRACT_YEAR_DIGITS            = 100;
+    private static final int FOURS_IN_REMAINDER             = 4;
+
+    private final int day;
+    private final int month;
+    private final int year;
+
+    /**
+     * <pre>Constructs a Date object with a year, month and day.
      *
-     * @param year  between MIN_NUM_YEARS and CURRENT_YEAR
-     * @param month between MIN_NUM_MONTHS and CURRENT_MONTH
-     * @param day   between MIN_NUM_DAYS and getMaxDaysInMonth
+     * Validates each parameter by validaint the year, month and day
+     * Checks if the year is between 1800 - current year (validateYear)
+     * Checks if the month is between 1 - 12 (validateMonth)
+     * Checks if the day is valid for the given month/year by using a
+     * switch. Certain months always have 31 days, certain months always have
+     * 30 days. February returns 29 or 28 depending on the outcome of isLeapYear
+     * (validateDay)</pre>
+     *
+     *
+     * @param year int between 1800 and CURRENT_YEAR
+     * @param month int 1-12 representing Jan - Dec
+     * @param day int 1-31
      */
     public Date(final int year,
                 final int month,
@@ -91,196 +115,175 @@ public class Date
         validateMonth(month);
         validateDay(day, month, year);
 
-        this.year  = year;
-        this.month = month;
-        this.day   = day;
-    }
-
-    /*
-     * Validator method that checks if year is within the given range of years
-     */
-    private static void validateYear(final int year)
-    {
-        // if year is less than minimum number of years or greater than current year throw illegal argument exception
-        if(year < MIN_NUM_YEARS || year > CURRENT_YEAR)
-        {
-            throw new IllegalArgumentException("Invalid year entry: " + year);
-        }
-    }
-
-    /*
-     * Validator method to check if month is within the range of max months in a year
-     */
-    private static void validateMonth(final int month)
-    {
-        // if month is less than minimum number of month or greater than maximum number of months throw illegal
-        // argument exception
-        if(month < MIN_NUM_MONTHS || month > MAX_NUM_MONTHS)
-        {
-            throw new IllegalArgumentException("Invalid month entry: " + month);
-        }
-    }
-
-    /*
-     * validator method that checks if day is within the maximum amount of days in that month
-     * Also uses helper method to check maximum days in that year
-     */
-    private static void validateDay(final int day,
-                                    final int month,
-                                    final int year)
-    {
-        // get days in month based on which month it is
-        final int daysInTheMonth;
-        daysInTheMonth = getMaxDaysInMonth(month, year);
-        // if day is less than minimum number of days or maximum number of days throw illegal argument exception
-        if (day < MIN_NUM_DAYS || day > daysInTheMonth)
-        {
-            throw new IllegalArgumentException("Invalid day entry: " + day);
-        }
+        this.year    = year;
+        this.month   = month;
+        this.day     = day;
     }
 
     /**
-     * Uses isLeapYear to validate and check for maximum number of days in the month with conditional logic.
-     *
-     * @param month a Integer
-     * @param year  a Integer
-     *
-     * @return      The number of total days in the month with leap year considered
-     */
-    private static int getMaxDaysInMonth(final int month,
-                                         final int year)
-    {
-        // returns the days in the month given the current date and if it is a leap year
-        switch (month)
-        {
-            case FEBRUARY:
-                return isLeapYear(year) ? DAYS_IN_LONGER_FEBRUARY : DAYS_IN_SHORTER_FEBRUARY;
-            case APRIL, JUNE, SEPTEMBER, NOVEMBER:
-                return DAYS_IN_OTHER_MONTHS;
-            default:
-                return MAX_NUM_DAYS;
-        }
-    }
-
-    /*
-     * Conditional to return true if the calculated year is a leap year, false if not.
-     * Calculation for this found off of Google
-     *
-     * @param year an integer
-     *
-     * @return a boolean value
-     */
-    private static boolean isLeapYear(final int year)
-    {
-        return (year % LEAP_YEAR_DIVISOR == NO_REMAINDER && year % CENTURY_DIVISOR != NO_REMAINDER) ||
-                (year % LEAP_YEAR_SPECIAL_DIVISOR == NO_REMAINDER);
-    }
-
-    /**
-     * Accessor for day.
-     *
-     * @return the day
-     */
-    public int getDay()
-    {
-        return day;
-    }
-
-    /**
-     * Accessor for month.
-     *
-     * @return the month
-     */
-    public int getMonth()
-    {
-        return month;
-    }
-
-    /**
-     * Accessor for the Year.
-     *
-     * @return the year
+     * Returns a copy of year instance field.
+     * @return int year 1800 - 2024
      */
     public int getYear()
     {
-        return year;
+        return this.year;
     }
 
     /**
-     * Accessor for the formatted full date in Year-Month-Day.
-     *
-     * @return a formatted date String (e.g. 2024-09-07)
+     * Returns a copy of the month instance field.
+     * @return int month 1-12
      */
-    public String getYYYYMMDD()
+    public int getMonth()
     {
-        final String fullDate;
-
-        fullDate = String.format("%04d-%02d-%02d", year, month, day);
-        return fullDate;
+        return this.month;
     }
 
     /**
-     * Calculates and returns the day of the week for the current date using a standard
-     * algorithm, broken down into several logical steps.
-     * <p>
-     * Steps:
-     * <ul>
-     *     <li>Step 0: Calculate yearsSinceBaseCentury by year modulo the {@code CENTURY_DIVISOR}.
-     *     Then Calculate baseCaseSum by adding centuryOffset to {@code yearsSinceBaseCentury}.</li>
-     *     <li>Step 1: Calculate numOfTwelves by dividing the baseCaseSum by TWELVE_YEAR_PERIOD.</li>
-     *     <li>Step 2: Calculate remainderDates by finding the MAX_NUM_MONTHS multiplied by numOfTwelves then subtract
-     *     the result from baseCaseSum; to handle partial years.</li>
-     *     <li>Step 3: Calculate numOfFours by dividing remainderDates by {@code FOUR_YEAR_PERIOD}.</li>
-     *     <li>Step 4: Calculate totalSumWithDays by adding day, sumOfTwelves, remainderDates and numOfFours.</li>
-     *     <li>Step 5: Calculate sumWithMonthCode by adding monthCode to totalSumWithDays.</li>
-     *     <li>Step 6: Calculate the dayOfWeekCode by sumWithMonthCode modulo {@code DAYS_IN_WEEK}.</li>
-     *     <li>Step 7: Insert dayOfWeekCode into switch case to{@code getDayOfTheWeek}. </li>
-     * </ul>
-     * <p>
-     * Leap year adjustments: If the year is a leap year and the month is either January or February,
-     * an additional {@code CENTURY_OFFSET_MODIFIER} is added to the calculation to account for
-     * the shortened months in leap years.
-     *
-     * @return the day of the week as a string (e.g., "Monday", "Tuesday").
+     * Returns a copy of the day instance field.
+     * @return int day 1-31
      */
-    public String getDayOfTheWeek()
+    public int getDay()
     {
-        int yearsSinceBaseCentury;
+        return this.day;
+    }
 
-        final int     centuryOffset;
-        final int     baseCaseSum;
-        final int     numOfTwelves;
-        final int     remainderDates;
-        final int     numOfFours;
-        final int     totalSumWithDays;
-        final int     sumWithMonthCode;
-        final int     dayOfWeekCode;
-        final int     monthCode;
-        final boolean leapYear;
-
-        // remaining years of base century
-        yearsSinceBaseCentury = year % CENTURY_DIVISOR;
-        centuryOffset         = getCenturyOffset(year);
-        leapYear              = isLeapYear(year);
-        monthCode             = getMonthCode(month);
-
-        // if year isLeapYear and month is JANUARY or FEBRUARY, add CENTURY_OFFSET_MODIFIER before calculation.
-        if(leapYear && (month == JANUARY || month == FEBRUARY))
+    /*
+    If the passed year is less than the minimum year of greater than the current year, throw an exception.
+     */
+    private static void validateYear(final int year) throws IllegalArgumentException
+    {
+        if (year < VALID_YEAR_MIN || year > CURRENT_YEAR)
         {
-            yearsSinceBaseCentury += CENTURY_OFFSET_MODIFIER;
+            throw new IllegalArgumentException("Year: " + year + " must be between 1- 2024");
         }
+    }
 
-        // add centuryOffset to yearsSinceBaseCentury
-        baseCaseSum      = yearsSinceBaseCentury + centuryOffset;
-        numOfTwelves     = baseCaseSum / TWELVE_YEAR_PERIOD;
-        remainderDates   = baseCaseSum - (MAX_NUM_MONTHS * numOfTwelves);
-        numOfFours       = remainderDates / FOUR_YEAR_PERIOD;
-        // adds total sum of calculations with day from date
-        totalSumWithDays = day + numOfTwelves + remainderDates + numOfFours;
-        sumWithMonthCode = totalSumWithDays + monthCode;
-        dayOfWeekCode    = sumWithMonthCode % DAYS_IN_WEEK;
+    /*
+    If the passed month is less than the minimum month number or greater than the max month number, throw an exception.
+     */
+    private static void validateMonth(final int month) throws IllegalArgumentException
+    {
+        if (month < MONTH_MIN || month > MONTH_MAX)
+        {
+            throw new IllegalArgumentException("Month: " + month + " must be between 1- 12");
+        }
+    }
 
-        switch(dayOfWeekCode)
+    /*
+    If the passed day is less than the minimum day number or not appropriate for the given month, throw an exception.
+     */
+    private static void validateDay(final int day,
+                                    final int month,
+                                    final int year) throws IllegalArgumentException
+    {
+        if (day < DAY_MIN || day > getDaysInMonth(month, year))
+        {
+            throw new IllegalArgumentException("Day: " + day + " doesn't exist for month " + month
+                    + " in year " + year);
+        }
+    }
+
+    /*
+    Switches the passed month against symbolic constants representing the months of the year. Returns the appropriate
+    amount of days corresponding to month and status of leap year.
+     */
+    private static int getDaysInMonth(final int month,
+                                      final int year) throws IllegalArgumentException
+    {
+        switch (month) {
+            case JANUARY:
+            case MARCH:
+            case MAY:
+            case JULY:
+            case AUGUST:
+            case OCTOBER:
+            case DECEMBER:
+                return MONTH_DAYS_31;
+            case APRIL:
+            case JUNE:
+            case SEPTEMBER:
+            case NOVEMBER:
+                return MONTH_DAYS_30;
+
+            case FEBRUARY:
+                if (isLeapYear(year))
+                {
+                    return MONTH_DAYS_29;
+                }
+                else
+                {
+                    return MONTH_DAYS_28;
+                }
+            default:
+                throw new IllegalArgumentException("Invalid month: " + month);
+        }
+    }
+
+    /**
+     * Gets the day of the week for the current Date object by calculating
+     * a weekCode number and switching on it to return a String corresponding
+     * to the appropriate day of the week.
+     *
+     * <p>weekCode is incremented according to three checks prior to the algorithm:</p>
+     * <ul>
+     *   <li>If the year of the Date is a leap year AND falls in Feb OR Jan, add 6</li>
+     *   <li>If the year falls in the 1800s, add 2</li>
+     *   <li>If the year falls in the 2000s, add 6</li>
+     * </ul>
+     *
+     * <p>Each step of the following algorithm produces a number that is added to weekCode:</p>
+     *
+     * <pre>
+     * Example: October 31, 1977
+     *
+     * 1. Calculate the number of twelves in the last two digits of the year.
+     *      year == 1977
+     *      (1977 % 100) = 77
+     *      77 / 12 = 6                                     weekCode += 6
+     *
+     * 2. Calculate the remainder from step one.
+     *      77 / 12 = 6
+     *      6 * 12 = 72
+     *      77 - 72 = 5                                     weekCode += 5
+     *
+     * 3. Calculate the number of fours in step two.
+     *      5 / 4 = 1                                       weekCode += 1
+     *
+     * 4. Add the day of the month to weekCode.
+     *      day == 31                                       weekCode += 31
+     *
+     * 5. Add the month code to weekCode according to the following table:
+     *      Month        [ J F M A M J J A S O N D ]
+     *      Month Code   [ 1 4 4 0 2 5 0 3 6 1 4 6 ]
+     *      October = O = 1                                 weekCode += 1
+     *
+     * 6. Final calculation:
+     *      weekCode = 44
+     *      weekCode % 7 = 2                                weekCode %= 7
+     *
+     * Result:
+     *      weekCode == 2
+     * </pre>
+     *
+     * <p>These six steps result in an int between 0-6.
+     * Each digit corresponds to a day of the week according to the following table:</p>
+     *
+     * <pre>
+     * Day of the Week [ S  S  M  T  W  T  F ]
+     * Week Code       [ 0  1  2  3  4  5  6 ]
+     * </pre>
+     *
+     * Since the final weekCode == 2, October 31, 1977 was a Monday.
+     *
+     * @return String of the day of the week for the Date object
+     */
+    public String getDayOfWeek()
+    {
+        int weekCode;
+
+        weekCode = getWeekCode();
+
+        switch (weekCode)
         {
             case SATURDAY:
                 return "Saturday";
@@ -297,80 +300,159 @@ public class Date
             case FRIDAY:
                 return "Friday";
             default:
-                return "Unknown";
+                return "Error";
         }
     }
 
     /*
-     * returns values that correlate to base year. (base year being 18XX 19XX 20XX)
+    Prepares the weekCode for getWeekCode() by adjusting the number according to some checks.
+    If the year is a leap year AND the month is january or february, adjust accordingly.
+    If the year is in the 1800s, adjust accordingly.
+    If the year is in the 2000s, adjust accordingly.
      */
-    private static int getCenturyOffset(final int year)
-    {
-        // year is greater than or equal to YEAR_TWO_THOUSAND return CENTURY_OFFSET_MODIFIER
-        if(year >= YEAR_TWO_THOUSANDS)
+    private int getWeekCode() {
+        int weekCode;
+
+        weekCode = 0;
+
+        if (isLeapYear(this.year) && (this.month == JANUARY || this.month == FEBRUARY))
         {
-            return CENTURY_OFFSET_MODIFIER;
+            weekCode += WEEK_CODE_LEAP_YEAR_ADJUSTOR;
         }
-        // else if year is less than YEAR_NINETEEN_HUNDREDS return PRE_19TH_CENTURY_OFFSET
-        else if(year < YEAR_NINETEEN_HUNDREDS)
+        if (this.year <= MAX_YEAR_1800S && this.year >= MIN_YEAR_1800S)
         {
-            return PRE_19TH_CENTURY_OFFSET;
+            weekCode += WEEK_CODE_1800S_ADJUSTOR;
         }
-        return NO_REMAINDER;
+        if (this.year <= MAX_YEAR_2000S && this.year >= MIN_YEAR_2000S)
+        {
+            weekCode += WEEK_CODE_2000S_ADJUSTOR;
+        }
+
+        weekCode += (this.year % EXTRACT_YEAR_DIGITS) / MONTHS_IN_YEAR;
+        weekCode += (this.year % EXTRACT_YEAR_DIGITS) % MONTHS_IN_YEAR;
+        weekCode += ((this.year % EXTRACT_YEAR_DIGITS) % MONTHS_IN_YEAR) / FOURS_IN_REMAINDER;
+        weekCode += this.day;
+        weekCode += this.getMonthCode();
+        weekCode %= DAYS_IN_WEEK;
+        return weekCode;
     }
 
     /*
-     * helper method that returns the month code
+    A leap year needs to be divisible by 4, but not divisible by 100 unless it's also divisible by 400.
      */
-    private static int getMonthCode(final int month)
+    private static boolean isLeapYear(final int year)
     {
-        switch(month)
+        return (year % DIVISIBLE_BY_FOUR_LEAP_YEAR == 0 && year % DIVISIBLE_BY_100_LEAP_YEAR != 0)
+                || (year % DIVISIBLE_BY_400_LEAP_YEAR == 0);
+    }
+
+    /*
+    Returns the appropriate month code according to
+        Letter of Month [ J F M A M J J A S O N D ]
+        Month Code      [ 1 4 4 0 2 5 0 3 6 1 4 6 ]
+     */
+    private int getMonthCode()
+    {
+        int monthCode;
+
+        monthCode = 0;
+
+        switch (this.month)
         {
-            case JANUARY:
-                return JANUARY_CODE;
-            case FEBRUARY:
-                return FEBRUARY_CODE;
-            case MARCH:
-                return MARCH_CODE;
             case APRIL:
-                return APRIL_CODE;
-            case MAY:
-                return MAY_CODE;
-            case JUNE:
-                return JUNE_CODE;
             case JULY:
-                return JULY_CODE;
-            case AUGUST:
-                return AUGUST_CODE;
-            case SEPTEMBER:
-                return SEPTEMBER_CODE;
+                monthCode = MONTH_CODE_0;
+                break;
+            case JANUARY:
             case OCTOBER:
-                return OCTOBER_CODE;
+                monthCode = MONTH_CODE_1;
+                break;
+            case MAY:
+                monthCode = MONTH_CODE_2;
+                break;
+            case AUGUST:
+                monthCode = MONTH_CODE_3;
+                break;
+            case FEBRUARY:
+            case MARCH:
             case NOVEMBER:
-                return NOVEMBER_CODE;
+                monthCode = MONTH_CODE_4;
+                break;
+            case JUNE:
+                monthCode = MONTH_CODE_5;
+                break;
+            case SEPTEMBER:
             case DECEMBER:
-                return DECEMBER_CODE;
+                monthCode = MONTH_CODE_6;
+                break;
             default:
-                throw new IllegalArgumentException("Invalid month entry");
+                break;
+        }
+        return monthCode;
+    }
+
+    /**
+     * <pre>
+     * Get the String of a month from the int that represents a month via a switch case.
+     *
+     * The month of each Date is stored as an int instance field. This function accesses
+     * the int month and switches on it according to the month constants. It returns the
+     * appropriate String corresponding to the int month.
+     * </pre>
+     *
+     * @return String of the month
+     */
+    public String getMonthAsString()
+    {
+        switch (this.getMonth()) {
+            case JANUARY:
+                return "January";
+            case FEBRUARY:
+                return "February";
+            case MARCH:
+                return "March";
+            case APRIL:
+                return "April";
+            case MAY:
+                return "May";
+            case JUNE:
+                return "June";
+            case JULY:
+                return "July";
+            case AUGUST:
+                return "August";
+            case SEPTEMBER:
+                return "September";
+            case OCTOBER:
+                return "October";
+            case NOVEMBER:
+                return "November";
+            case DECEMBER:
+                return "December";
+            default:
+                return "Error getting the month";
         }
     }
 
     /**
-     * Main method used to test all methods made in Date Class.
-     *
-     * @param args unused
+     * Prints the details of a Date object.
+     * @return String containing day of the week, month, day of the year and the year
      */
-    public static void main(final String[] args)
+    @Override
+    public String toString()
     {
-        Date date;
-        date = new Date(1977, 10, 31);
+        StringBuilder sb;
 
-        System.out.println(date);
-        System.out.println(date.getYYYYMMDD());
-        System.out.println(date.getDayOfTheWeek());
-        System.out.println(date.getDay());
-        System.out.println(date.getMonth());
-        System.out.println(date.getYear());
+        sb = new StringBuilder();
 
+        sb.append(getDayOfWeek());
+        sb.append(", ");
+        sb.append(getMonthAsString());
+        sb.append(" ");
+        sb.append(getDay());
+        sb.append(", ");
+        sb.append(getYear());
+
+        return sb.toString();
     }
 }

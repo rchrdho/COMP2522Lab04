@@ -7,9 +7,10 @@ package ca.bcit.comp2522.lab04;
  *
  * @author Richard Ho
  * @author Jayden Hutchinson
- * @version 1.0
+ * @author Bryson Lindy
+ * @version 1.1
  */
-public class Person
+abstract class Person implements Printable, Reversible, Comparable<Person>
 {
     // instance variables
     private final Name name;
@@ -68,6 +69,47 @@ public class Person
         // Concatenates the person's current dead or alive status with the person's birth date
         return String.format("%s (%s) was born on %s, %s %02d, %d", name.getFullName(), status,
                              birthDate.getDayOfTheWeek(), getMonthName(birthDate.getMonth()), birthDate.getDay(), birthDate.getYear());
+    }
+
+    /**
+     * Displays the instance data of a Person object in order of assignment.
+     */
+    @Override
+    public void display()
+    {
+        System.out.printf("Name: %s\n", this.getName());
+        System.out.printf("Birth date: %s\n", this.getBirthDate());
+        if (this.getDeathDate() != null)
+        {
+            System.out.printf("Death date: %s\n", this.getDeathDate());
+        }
+    }
+
+    /**
+     * Displays the instance data of a Person object is reverse order of assignment.
+     */
+    @Override
+    public void backward()
+    {
+        if (this.getDeathDate() != null)
+        {
+            System.out.printf("Death date: %s\n", this.getDeathDate());
+        }
+        System.out.printf("Birth date: %s\n", this.getBirthDate());
+        System.out.printf("Name: %s\n", this.getName());
+    }
+
+    /**
+     * Compares this Person to that Person
+     * @param that the object to be compared.
+     * @return +int when this is older than that
+     *         0 when this is the same age as that
+     *         -int when this is younger than that
+     */
+    @Override
+    public int compareTo(final Person that)
+    {
+        return this.getBirthDate().getYear() - that.getBirthDate().getYear();
     }
 
     /**

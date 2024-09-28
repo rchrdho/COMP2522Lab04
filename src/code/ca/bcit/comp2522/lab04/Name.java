@@ -1,6 +1,5 @@
 package ca.bcit.comp2522.lab04;
 
-
 /**
  * Name class.
  * must not be null or blank,
@@ -14,7 +13,7 @@ package ca.bcit.comp2522.lab04;
  * @author  Bryson Lindy
  * @version 2.0
  */
-public class Name implements Printable
+public class Name implements Printable, Reversible
 {
     // instance variables
     private final String first;
@@ -118,45 +117,22 @@ public class Name implements Printable
     }
 
     /**
-     * Concatenates both the first and last name input.
-     *
-     * @return Full name concatenated
+     * Prints the first and last names.
      */
-    public String getFullName()
+    @Override
+    public void display()
     {
-        // full name string builder initialization
-        final StringBuilder fullName;
-        fullName = new StringBuilder();
-
-        // creates a string of the first and last name with capital first letter and lower case for the rest
-        fullName.append(first.substring(FIRST_CHAR, SECOND_CHAR).toUpperCase()
-                + first.substring(SECOND_CHAR, first.length()).toLowerCase()); // append first name with capital first letter and lower rest
-
-        fullName.append(" "); // append space
-
-        fullName.append(last.substring(FIRST_CHAR, SECOND_CHAR).toUpperCase()
-                + last.substring(SECOND_CHAR, last.length()).toLowerCase()); // append last name with capital first letter and lower rest
-
-        return fullName.toString(); // return first and last name
+        System.out.printf("%s %s", this.first,
+                                   this.last);
     }
 
     /**
-     * Method that will reverse a full name.
-     *
-     * @return Full name reversed
+     * Prints the first and last name in reverse.
      */
-    public String getReverseName()
+    @Override
+    public void backward()
     {
-        // reversed name string builder initialization
-        final StringBuilder reversedName;
-        reversedName = new StringBuilder();
-
-        reversedName.append(first); // append last name
-        reversedName.append(" "); // append a space
-        reversedName.append(last); // append first name
-
-        return reversedName.reverse().toString(); // return full reversed name
+        System.out.printf("%s %s", this.last,
+                                   this.first);
     }
-
-
 }
