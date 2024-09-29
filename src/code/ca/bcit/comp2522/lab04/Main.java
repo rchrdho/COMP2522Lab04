@@ -169,8 +169,8 @@ public class Main
                             gilbertBook, chernowBook, isaacsonBookTwo, frankBook, mandelaBook, gandhiBook, angelouBook,
                             xBook};
 
-        biographies = new Biography[] {(Biography) caroBook, (Biography)isaacsonBookOne, (Biography)gilbertBook,
-                                       (Biography) chernowBook, (Biography)isaacsonBookTwo, (Biography)frankBook,
+        biographies = new Biography[] {(Biography)caroBook, (Biography)isaacsonBookOne, (Biography)gilbertBook,
+                                       (Biography)chernowBook, (Biography)isaacsonBookTwo, (Biography)frankBook,
                                        (Biography)mandelaBook, (Biography)gandhiBook, (Biography)angelouBook,
                                        (Biography)xBook};
 

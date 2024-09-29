@@ -165,7 +165,7 @@ public class Book implements Comparable<Book>,
     @Override
     public int compareTo(final Book that)
     {
-        return this.getYearPublished() - that.getYearPublished();
+        return that.getYearPublished() - this.getYearPublished();
     }
 
     /**

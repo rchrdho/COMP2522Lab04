@@ -9,7 +9,8 @@ package ca.bcit.comp2522.lab04;
  *
  * @version 1.0
  */
-public class Author extends Person implements Printable
+public class Author extends Person
+                    implements Printable
 {
     private final String genre;
 

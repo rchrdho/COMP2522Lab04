@@ -13,7 +13,9 @@ import java.util.Objects;
  *
  * @version 1.1
  */
-abstract class Person implements Printable, Reversible, Comparable<Person>
+abstract class Person implements Printable,
+                                 Reversible,
+                                 Comparable<Person>
 {
     // instance variables
     private final Name name;
@@ -101,7 +103,7 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
     @Override
     public int compareTo(final Person that)
     {
-        return this.getBirthDate().getYear() - that.getBirthDate().getYear();
+        return that.getBirthDate().getYear() - this.getBirthDate().getYear();
     }
 
     /**
