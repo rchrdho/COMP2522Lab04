@@ -182,5 +182,11 @@ public class Main
             book.display();
         }
 
+        System.out.println("Book backward() calls");
+        for (Book book : books)
+        {
+            book.backward();
+        }
+
     }
 }
