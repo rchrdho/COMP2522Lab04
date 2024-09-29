@@ -10,6 +10,7 @@ import java.util.Objects;
  * @author Richard Ho
  * @author Jayden Hutchinson
  * @author Bryson Lindy
+ *
  * @version 1.1
  */
 abstract class Person implements Printable, Reversible, Comparable<Person>

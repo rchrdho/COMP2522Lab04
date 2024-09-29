@@ -11,6 +11,7 @@ package ca.bcit.comp2522.lab04;
  * @author  Richard Ho
  * @author  Jayden Hutchinson
  * @author  Bryson Lindy
+ *
  * @version 2.0
  */
 public class Name implements Printable,

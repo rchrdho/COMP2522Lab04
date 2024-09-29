@@ -82,6 +82,7 @@ public class Main
         Book xBook;
 
         Book[] books;
+        Biography[] biographies;
 
         orwellName = new Name("George", "Orwell");
         leeName = new Name("Harper", "Lee");
@@ -151,10 +152,13 @@ public class Main
         austenBook = new Book("Pride and Prejudice", (Author)austenAuthor, 1813);
         fitzgeraldBook = new Book("The Great Gatsby", (Author)fitzgeraldAuthor, 1925);
         melvilleBook = new Book("Moby-Dick", (Author)melvilleAuthor, 1851);
+
         caroBook = new Biography("The Power Broker", (Author)caroAuthor, 1974, "Robert Moses");
         isaacsonBookOne = new Biography("Steve Jobs", (Author)isaacsonAuthor, 2011, "Steve Jobs");
         gilbertBook = new Biography("Churchill: A Life", (Author)gilbertAuthor, 1991, "Winston Churchill");
         isaacsonBookTwo = new Biography("His Life and Universe", (Author)isaacsonAuthor, 2007, "Alert Einstein");
+        chernowBook = new Biography("Alexander Hamilton", (Author)chernowAuthor, 2004, "Alexander Hamilton");
+
         frankBook = new Autobiography("The Diary of a Young Girl", (Author)frankAuthor, 1947);
         mandelaBook = new Autobiography("Long Walk of Freedom", (Author)mandelaAuthor, 1994);
         gandhiBook = new Autobiography("The Story of My Experiments with Truth", (Author)gandhiAuthor, 1927);
@@ -162,7 +166,13 @@ public class Main
         xBook = new Autobiography("Autobiography of Malcolm X", (Author)xAuthor, 1965);
 
         books = new Book[] {orwellBook, leeBook, austenBook, fitzgeraldBook, melvilleBook, caroBook, isaacsonBookOne,
-                            gilbertBook, isaacsonBookTwo, frankBook, mandelaBook, gandhiBook, angelouBook, xBook};
+                            gilbertBook, chernowBook, isaacsonBookTwo, frankBook, mandelaBook, gandhiBook, angelouBook,
+                            xBook};
+
+        biographies = new Biography[] {(Biography) caroBook, (Biography)isaacsonBookOne, (Biography)gilbertBook,
+                                       (Biography) chernowBook, (Biography)isaacsonBookTwo, (Biography)frankBook,
+                                       (Biography)mandelaBook, (Biography)gandhiBook, (Biography)angelouBook,
+                                       (Biography)xBook};
 
         System.out.println("Author display() calls");
         for (Person author : authors)
@@ -177,7 +187,15 @@ public class Main
             author.backward();
         }
 
-        System.out.println("Book display() calls");
+        System.out.println("Authors compared by birth years");
+        for (Person author : authors)
+        {
+            System.out.println(authors[0].getBirthDate().getYear() + " compared to " + author.getBirthDate().getYear());
+            System.out.println(authors[0].compareTo(author));
+
+        }
+
+        System.out.println("\nBook display() calls");
         for (Book book : books)
         {
             book.display();
@@ -187,6 +205,21 @@ public class Main
         for (Book book : books)
         {
             book.backward();
+        }
+
+        System.out.println("Book compare publication years");
+        for (Book book : books)
+        {
+            System.out.println(books[0].getYearPublished() + " compared to " + book.getYearPublished());
+            System.out.println(books[0].compareTo(book));
+        }
+
+        System.out.println("\nBiography compare subjects: ");
+        for (Biography biography : biographies)
+        {
+                System.out.println(biographies[0].getSubject() + " compared to " + biography.getSubject());
+                System.out.println(biographies[0].equals(biography));
+
         }
 
     }

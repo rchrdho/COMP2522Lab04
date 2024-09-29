@@ -20,9 +20,9 @@ public class Author extends Person implements Printable
      * @param birthDate a Date this person was born
      * @param deathDate a Date this person died
      */
-    public Author(final Name name,
-                  final Date birthDate,
-                  final Date deathDate,
+    public Author(final Name   name,
+                  final Date   birthDate,
+                  final Date   deathDate,
                   final String genre)
     {
         super(name, birthDate, deathDate);
@@ -31,6 +31,9 @@ public class Author extends Person implements Printable
         this.genre = genre;
     }
 
+    /*
+     * validates genre is not null or empty.
+     */
     private static void validateGenre(final String genre)
                                       throws IllegalArgumentException
     {
