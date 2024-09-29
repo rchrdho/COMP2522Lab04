@@ -7,9 +7,9 @@ public class Book implements Comparable<Book>,
                              Printable,
                              Reversible
 {
-    private static final int MAX_TITLE_CHARS = 100;
-    private static final int CURRENT_YEAR    = 2024;
-    private static final int MIN_YEAR        = 1;
+    private static final int MAX_TITLE_LENGTH = 100;
+    private static final int CURRENT_YEAR     = 2024;
+    private static final int MIN_YEAR         = 868;
 
     private final String bookTitle;
     private final Author author;
@@ -18,12 +18,12 @@ public class Book implements Comparable<Book>,
     /**
      *
      * @param title
-     * @param yearPublished
      * @param author
+     * @param yearPublished
      */
     public Book(final String title,
-                final int    yearPublished,
-                final Author author)
+                final Author author,
+                final int    yearPublished)
                 throws IllegalArgumentException
     {
         validateTitle(title);
@@ -31,23 +31,15 @@ public class Book implements Comparable<Book>,
         validateAuthor(author);
 
         this.bookTitle      = title;
-        this.yearPublished  = yearPublished;
         this.author         = author;
+        this.yearPublished  = yearPublished;
     }
 
     private void validateTitle(final String title)
     {
-        if (title == null || title.isBlank() || title.length() >= MAX_TITLE_CHARS)
+        if (title == null || title.isBlank() || title.length() >= MAX_TITLE_LENGTH)
         {
             throw new IllegalArgumentException("Invalid title entry");
-        }
-    }
-
-    private void validateYearPublished(final int yearPublished)
-    {
-        if (yearPublished < MIN_YEAR || yearPublished > CURRENT_YEAR)
-        {
-            throw new IllegalArgumentException("Invalid year, outside of range");
         }
     }
 
@@ -56,6 +48,14 @@ public class Book implements Comparable<Book>,
         if (author == null)
         {
             throw new IllegalArgumentException("Invalid author entry");
+        }
+    }
+
+    private void validateYearPublished(final int yearPublished)
+    {
+        if (yearPublished < MIN_YEAR || yearPublished > CURRENT_YEAR)
+        {
+            throw new IllegalArgumentException("Invalid year, outside of range");
         }
     }
 
@@ -117,9 +117,9 @@ public class Book implements Comparable<Book>,
 
         bob = new StringBuilder();
 
-        bob.append(this.getBookTitle()     + "\n");
-        bob.append(this.getAuthor()        + "\n");
-        bob.append(this.getYearPublished() + "\n");
+        bob.append(this.getBookTitle()).append("\n");
+        bob.append(this.getAuthor()).append("\n");
+        bob.append(this.getYearPublished()).append("\n");
 
         System.out.println(bob);
     }
@@ -131,9 +131,9 @@ public class Book implements Comparable<Book>,
 
         bob = new StringBuilder();
 
-        bob.append(this.getYearPublished() + "\n");
-        bob.append(this.getAuthor()        + "\n");
-        bob.append(this.getBookTitle()     + "\n");
+        bob.append(this.getYearPublished()).append("\n");
+        bob.append(this.getAuthor()).append("\n");
+        bob.append(this.getBookTitle()).append("\n");
 
         System.out.println(bob);
     }

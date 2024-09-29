@@ -64,7 +64,7 @@ public class Date implements Printable
     private static final int MONTH_CODE_5                   = 5;
     private static final int MONTH_CODE_6                   = 6;
 
-    private static final int VALID_YEAR_MIN                 = 1800;
+    private static final int VALID_YEAR_MIN                 = 1500;
 
     private static final int WEEK_CODE_LEAP_YEAR_ADJUSTOR   = 6;
     private static final int WEEK_CODE_1800S_ADJUSTOR       = 2;
@@ -191,9 +191,9 @@ public class Date implements Printable
     public void display()
     {
         System.out.printf("%s, %s %d, %d\n", this.getDayOfWeek(),
-                                           this.getMonthAsString(),
-                                           this.getDay(),
-                                           this.getYear());
+                                             this.getMonthAsString(),
+                                             this.getDay(),
+                                             this.getYear());
     }
 
     /*

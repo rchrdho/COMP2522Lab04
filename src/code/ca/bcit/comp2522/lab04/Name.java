@@ -13,7 +13,8 @@ package ca.bcit.comp2522.lab04;
  * @author  Bryson Lindy
  * @version 2.0
  */
-public class Name implements Printable, Reversible
+public class Name implements Printable,
+                             Reversible
 {
     // instance variables
     private final String first;
@@ -54,7 +55,7 @@ public class Name implements Printable, Reversible
         // if firstName is null, blank, or less than maximum length, throw exception
         if(firstName == null ||
                 firstName.isBlank() ||
-                firstName.length() < MAX_NAME_LENGTH_CHARS ||
+                firstName.length() > MAX_NAME_LENGTH_CHARS ||
                 firstName.equalsIgnoreCase(ILLEGAL_STRING))
         {
             throw new IllegalArgumentException("Invalid first name entry");
@@ -70,7 +71,7 @@ public class Name implements Printable, Reversible
         // if lastName is null, blank, or less than MAX_NAME_LENGTH_CHARS, throw exception
         if(lastName == null ||
                        lastName.isBlank() ||
-                       lastName.length() < MAX_NAME_LENGTH_CHARS ||
+                       lastName.length() > MAX_NAME_LENGTH_CHARS ||
                        lastName.equalsIgnoreCase(ILLEGAL_STRING))
         {
             throw new IllegalArgumentException("Invalid last name entry");
@@ -95,6 +96,16 @@ public class Name implements Printable, Reversible
     public String getLast()
     {
         return last;
+    }
+
+    /**
+     * Accessor for full name.
+     *
+     * @return full name
+     */
+    public String getFullName()
+    {
+        return first + " " + last;
     }
 
     /**

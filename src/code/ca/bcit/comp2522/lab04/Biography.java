@@ -8,12 +8,12 @@ public class Biography extends Book
     private final String subject;
 
     public Biography(final String title,
-                     final int    yearPublished,
                      final Author author,
+                     final int    yearPublished,
                      final String subject)
                      throws IllegalArgumentException
     {
-        super(title, yearPublished, author);
+        super(title, author, yearPublished);
         validateSubject(subject);
         this.subject = subject;
     }

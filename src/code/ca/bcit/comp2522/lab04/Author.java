@@ -20,10 +20,10 @@ public class Author extends Person implements Printable
      * @param birthDate a Date this person was born
      * @param deathDate a Date this person died
      */
-    public Author(Name name,
-                  Date birthDate,
-                  Date deathDate,
-                  String genre)
+    public Author(final Name name,
+                  final Date birthDate,
+                  final Date deathDate,
+                  final String genre)
     {
         super(name, birthDate, deathDate);
 

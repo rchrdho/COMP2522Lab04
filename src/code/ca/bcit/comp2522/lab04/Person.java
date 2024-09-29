@@ -55,12 +55,19 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
     @Override
     public void display()
     {
-        System.out.printf("Name: %s\n", this.getName());
-        System.out.printf("Birth date: %s\n", this.getBirthDate());
-        if (this.getDeathDate() != null)
+        final StringBuilder sb;
+
+        sb = new StringBuilder();
+
+        sb.append(String.format("Name: %s\n", this.name.getFullName()));
+        sb.append(String.format("Birth date: %s\n", this.birthDate));
+
+        if (this.deathDate != null)
         {
-            System.out.printf("Death date: %s\n", this.getDeathDate());
+            sb.append(String.format("Death date: %s\n", this.deathDate));
         }
+
+        System.out.printf("%s", sb);
     }
 
     /**
@@ -69,12 +76,18 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
     @Override
     public void backward()
     {
+        final StringBuilder sb;
+
+        sb = new StringBuilder();
+
         if (this.getDeathDate() != null)
         {
-            System.out.printf("Death date: %s\n", this.getDeathDate());
+            sb.append(String.format("Death date: %s\n", this.deathDate));
         }
-        System.out.printf("Birth date: %s\n", this.getBirthDate());
-        System.out.printf("Name: %s\n",       this.getName());
+        sb.append(String.format("Birth date: %s\n", this.birthDate));
+        sb.append(String.format("Name: %s\n", this.name.getFullName()));
+
+        System.out.println(sb);
     }
 
     /**
@@ -179,7 +192,7 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
      */
     public Name getName()
     {
-        return name;
+        return this.name;
     }
 
     /**
@@ -189,7 +202,7 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
      */
     public Date getBirthDate()
     {
-        return birthDate;
+        return this.birthDate;
     }
 
     /**
@@ -199,6 +212,6 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
      */
     public Date getDeathDate()
     {
-        return deathDate;
+        return this.deathDate;
     }
 }
