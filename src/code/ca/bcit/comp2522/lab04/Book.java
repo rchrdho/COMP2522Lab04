@@ -118,7 +118,7 @@ public class Book implements Comparable<Book>,
         bob = new StringBuilder();
 
         bob.append(this.getBookTitle()).append("\n");
-        bob.append(this.getAuthor()).append("\n");
+        bob.append(this.getAuthor().getName().getFullName()).append("\n");
         bob.append(this.getYearPublished()).append("\n");
 
         System.out.println(bob);
@@ -132,7 +132,7 @@ public class Book implements Comparable<Book>,
         bob = new StringBuilder();
 
         bob.append(this.getYearPublished()).append("\n");
-        bob.append(this.getAuthor()).append("\n");
+        bob.append(this.getAuthor().getName().getFullName()).append("\n");
         bob.append(this.getBookTitle()).append("\n");
 
         System.out.println(bob);

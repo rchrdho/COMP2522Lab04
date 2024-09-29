@@ -65,6 +65,24 @@ public class Main
 
         Person[] authors;
 
+        Book orwellBook;
+        Book leeBook;
+        Book austenBook;
+        Book fitzgeraldBook;
+        Book melvilleBook;
+        Book caroBook;
+        Book isaacsonBookOne;
+        Book isaacsonBookTwo;
+        Book gilbertBook;
+        Book chernowBook;
+        Book frankBook;
+        Book mandelaBook;
+        Book gandhiBook;
+        Book angelouBook;
+        Book xBook;
+
+        Book[] books;
+
         orwellName = new Name("George", "Orwell");
         leeName = new Name("Harper", "Lee");
         austenName = new Name("Jane", "Austen");
@@ -128,15 +146,40 @@ public class Main
                                 caroAuthor, isaacsonAuthor, gilbertAuthor, chernowAuthor, frankAuthor,
                                 mandelaAuthor, gandhiAuthor, angelouAuthor, xAuthor};
 
+        orwellBook = new Book("1984", (Author)orwellAuthor, 1949);
+        leeBook = new Book("To Kill A Mockingbird", (Author)leeAuthor, 1960);
+        austenBook = new Book("Pride and Prejudice", (Author)austenAuthor, 1813);
+        fitzgeraldBook = new Book("The Great Gatsby", (Author)fitzgeraldAuthor, 1925);
+        melvilleBook = new Book("Moby-Dick", (Author)melvilleAuthor, 1851);
+        caroBook = new Biography("The Power Broker", (Author)caroAuthor, 1974, "Robert Moses");
+        isaacsonBookOne = new Biography("Steve Jobs", (Author)isaacsonAuthor, 2011, "Steve Jobs");
+        gilbertBook = new Biography("Churchill: A Life", (Author)gilbertAuthor, 1991, "Winston Churchill");
+        isaacsonBookTwo = new Biography("His Life and Universe", (Author)isaacsonAuthor, 2007, "Alert Einstein");
+        frankBook = new Autobiography("The Diary of a Young Girl", (Author)frankAuthor, 1947);
+        mandelaBook = new Autobiography("Long Walk of Freedom", (Author)mandelaAuthor, 1994);
+        gandhiBook = new Autobiography("The Story of My Experiments with Truth", (Author)gandhiAuthor, 1927);
+        angelouBook = new Autobiography("I Know Why the Caged Bird Sings", (Author)angelouAuthor, 1969);
+        xBook = new Autobiography("Autobiography of Malcolm X", (Author)xAuthor, 1965);
+
+        books = new Book[] {orwellBook, leeBook, austenBook, fitzgeraldBook, melvilleBook, caroBook, isaacsonBookOne,
+                            gilbertBook, isaacsonBookTwo, frankBook, mandelaBook, gandhiBook, angelouBook, xBook};
+
         System.out.println("Author display() calls");
         for (Person author : authors)
         {
             author.display();
         }
 
+        System.out.println("Author backward() calls");
         for (Person author : authors)
         {
             author.backward();
+        }
+
+        System.out.println("Book display() calls");
+        for (Book book : books)
+        {
+            book.display();
         }
 
     }
