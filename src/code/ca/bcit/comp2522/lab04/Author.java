@@ -47,7 +47,7 @@ public class Author extends Person implements Printable
     public void display()
     {
         super.display();
-        System.out.printf("Genre: %s\n", genre);
+        System.out.printf("Genre: %s\n", this.genre);
     }
 
     /**

@@ -168,6 +168,7 @@ public class Main
         for (Person author : authors)
         {
             author.display();
+            System.out.println();
         }
 
         System.out.println("Author backward() calls");

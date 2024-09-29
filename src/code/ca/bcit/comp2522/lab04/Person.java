@@ -67,7 +67,7 @@ abstract class Person implements Printable, Reversible, Comparable<Person>
             sb.append(String.format("Death date: %s\n", this.deathDate));
         }
 
-        System.out.println(sb);
+        System.out.printf("%s", sb);
     }
 
     /**
