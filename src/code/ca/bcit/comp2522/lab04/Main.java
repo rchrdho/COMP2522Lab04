@@ -56,6 +56,7 @@ public class Main
         Person caroAuthor;
         Person isaacsonAuthor;
         Person gilbertAuthor;
+        Person chernowAuthor;
         Person frankAuthor;
         Person mandelaAuthor;
         Person gandhiAuthor;
@@ -112,7 +113,14 @@ public class Main
         fitzgeraldAuthor = new Author(fitzgeraldName, fitzgeraldBirthDate, fitzgeraldDeathDate, "Modernist Fiction");
         melvilleAuthor = new Author(melvilleName, melvilleBirthDate, melvilleDeathDate, "Adventure Fiction");
         caroAuthor = new Author(caroName, caroBirthDate, caroDeathDate, "Biography");
-
+        isaacsonAuthor = new Author(isaacsonName, isaacsonBirthDate, isaacsonDeathDate, "Biography");
+        gilbertAuthor = new Author(gilbertName, gilbertBirthDate, gilbertDeathDate, "Biography");
+        chernowAuthor = new Author(chernowName, chernowBirthDate, chernowDeathDate, "Biography");
+        frankAuthor = new Author(frankName, frankBirthDate, frankDeathDate, "Biography");
+        mandelaAuthor = new Author(mandelaName, mandelaBirthDate, mandelaDeathDate, "Biography");
+        gandhiAuthor = new Author(gandhiName, gandhiBirthDate, gandhiDeathDate, "Biography");
+        angelouAuthor = new Author(angelouName, angelouBirthDate, angelouDeathDate, "Biography");
+        xAuthor = new Author(xName, xBirthDate, xDeathDate, "Biography");
 
         orwellAuthor.display();
         System.out.println();
