@@ -63,6 +63,8 @@ public class Main
         Person angelouAuthor;
         Person xAuthor;
 
+        Person[] authors;
+
         orwellName = new Name("George", "Orwell");
         leeName = new Name("Harper", "Lee");
         austenName = new Name("Jane", "Austen");
@@ -122,15 +124,20 @@ public class Main
         angelouAuthor = new Author(angelouName, angelouBirthDate, angelouDeathDate, "Biography");
         xAuthor = new Author(xName, xBirthDate, xDeathDate, "Biography");
 
-        orwellAuthor.display();
-        System.out.println();
-        leeAuthor.display();
-        System.out.println();
-        austenAuthor.display();
-        System.out.println();
-        fitzgeraldAuthor.display();
-        System.out.println();
-        melvilleAuthor.display();
+        authors = new Person[] {orwellAuthor, leeAuthor, austenAuthor, fitzgeraldAuthor, melvilleAuthor,
+                                caroAuthor, isaacsonAuthor, gilbertAuthor, chernowAuthor, frankAuthor,
+                                mandelaAuthor, gandhiAuthor, angelouAuthor, xAuthor};
+
+        System.out.println("Author display() calls");
+        for (Person author : authors)
+        {
+            author.display();
+        }
+
+        for (Person author : authors)
+        {
+            author.backward();
+        }
 
     }
 }
