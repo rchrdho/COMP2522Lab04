@@ -183,11 +183,30 @@ public class Main
         }
 
         System.out.println("Authors compared by birth years");
-        for (Person author : authors)
-        {
-            System.out.println(authors[0].getBirthDate().getYear() + " compared to " + author.getBirthDate().getYear());
-            System.out.println(authors[0].compareTo(author));
 
+        for (int i = 0; i < authors.length - 1; ++i)
+        {
+            for (int j = authors.length - 1; j > i; --j)
+            {
+                if (authors[i].compareTo(authors[j]) > 0)
+                {
+                    System.out.printf("%s is older than %s.\n",
+                            authors[i].getName().getFullName(),
+                            authors[j].getName().getFullName());
+                }
+                else if (authors[i].compareTo(authors[j]) < 0)
+                {
+                    System.out.printf("%s is younger than %s.\n",
+                            authors[i].getName().getFullName(),
+                            authors[j].getName().getFullName());
+                }
+                else
+                {
+                    System.out.printf("%s is the same age as %s.\n",
+                            authors[i].getName().getFullName(),
+                            authors[j].getName().getFullName());
+                }
+            }
         }
 
         System.out.println("\nBook display() calls");
