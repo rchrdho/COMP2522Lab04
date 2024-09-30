@@ -148,6 +148,18 @@ abstract class Person implements Printable,
     }
 
     /**
+     * Returns an int based on the same instance fields used in equals.
+     * @return int hashcode made of Person name, birthday, death date
+     */
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(this.getName(),
+                            this.getBirthDate(),
+                            this.getDeathDate());
+    }
+
+    /**
      * Given the integer representation of the month in the year, gives the name of said month
      *
      * @param month integer of what month in the year it is
