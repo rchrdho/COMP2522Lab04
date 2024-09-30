@@ -240,5 +240,23 @@ public class Main
                         " was published the same year as \"" + books[i + 1].getBookTitle() + "\" by " + books[i + 1].getAuthor().getName().getFullName());
             }
         }
+
+        System.out.println("\nBiography compare subject");
+        for (int i = 0; i < books.length - 1; ++i)
+        {
+            if (books[i] instanceof Biography)
+            {
+                if (books[i].equals(books[i + 1]) == true)
+                {
+                    System.out.println(((Biography)books[i]).getSubject() + "\'s biography subject is the same as"
+                                               + ((Biography)books[i + 1]).getSubject() + "\'s biography subject.");
+                }
+                else
+                {
+                    System.out.println(((Biography) books[i]).getSubject() + "\'s biography subject is different to "
+                                               + ((Biography)books[i + 1]).getSubject() + "\'s biography subject.");
+                }
+            }
+        }
     }
 }
