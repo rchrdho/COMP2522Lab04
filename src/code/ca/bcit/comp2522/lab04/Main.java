@@ -207,15 +207,18 @@ public class Main
         {
             if (books[i].compareTo(books[i + 1]) > 0)
             {
-                System.out.println(books[i].getBookTitle() + " is older than " + books[i + 1].getBookTitle());
+                System.out.println("\"" + books[i].getBookTitle() + "\" by " + books[i].getAuthor().getName().getFullName() +
+                        " is older than \"" + books[i + 1].getBookTitle() + "\" by " + books[i + 1].getAuthor().getName().getFullName());
             }
             else if (books[i].compareTo(books[i + 1]) < 0)
             {
-                System.out.println(books[i].getBookTitle() + " is the same age as " + books[i + 1].getBookTitle());
+                System.out.println("\"" + books[i].getBookTitle() + "\" by " + books[i].getAuthor().getName().getFullName()
+                        + " is newer than \"" + books[i + 1].getBookTitle() + "\" by " + books[i + 1].getAuthor().getName().getFullName());
             }
             else
             {
-                System.out.println(books[i].getBookTitle() + " is younger than " + books[i + 1].getBookTitle());
+                System.out.println("\"" + books[i].getBookTitle() + "\" by " + books[i].getAuthor().getName().getFullName() +
+                        " was published the same year as \"" + books[i + 1].getBookTitle() + "\" by " + books[i + 1].getAuthor().getName().getFullName());
             }
         }
     }
