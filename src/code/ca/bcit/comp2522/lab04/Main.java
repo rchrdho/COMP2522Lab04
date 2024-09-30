@@ -169,11 +169,6 @@ public class Main
                             gilbertBook, chernowBook, isaacsonBookTwo, frankBook, mandelaBook, gandhiBook, angelouBook,
                             xBook};
 
-        biographies = new Biography[] {(Biography)caroBook, (Biography)isaacsonBookOne, (Biography)gilbertBook,
-                                       (Biography)chernowBook, (Biography)isaacsonBookTwo, (Biography)frankBook,
-                                       (Biography)mandelaBook, (Biography)gandhiBook, (Biography)angelouBook,
-                                       (Biography)xBook};
-
         System.out.println("Author display() calls");
         for (Person author : authors)
         {
@@ -207,20 +202,26 @@ public class Main
             book.backward();
         }
 
-        System.out.println("Book compare publication years");
-        for (Book book : books)
+        System.out.println("Compare Books with polymorphism");
+        for (int i = 0; i < books.length - 1; ++i)
         {
-            System.out.println(books[0].getYearPublished() + " compared to " + book.getYearPublished());
-            System.out.println(books[0].compareTo(book));
+            if (books[i].compareTo(books[i + 1]) > 0)
+            {
+                System.out.println(books[i].getBookTitle() + " is greater than " + books[i + 1].getBookTitle());
+            } else if (books[i].compareTo(books[i + 1]) < 0) {
+                System.out.println(books[i].getBookTitle() + " is less than " + books[i + 1].getBookTitle());
+            } else {
+                System.out.println(books[i].getBookTitle() + " is equal to " + books[i + 1].getBookTitle());
+            }
         }
 
-        System.out.println("\nBiography compare subjects: ");
-        for (Biography biography : biographies)
-        {
-                System.out.println(biographies[0].getSubject() + " compared to " + biography.getSubject());
-                System.out.println(biographies[0].equals(biography));
-
-        }
+//        System.out.println("\nBiography compare subjects: ");
+//        for (Biography biography : biographies)
+//        {
+//                System.out.println(biographies[0].getSubject() + " compared to " + biography.getSubject());
+//                System.out.println(biographies[0].equals(biography));
+//
+//        }
 
     }
 }
