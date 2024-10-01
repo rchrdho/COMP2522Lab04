@@ -82,7 +82,6 @@ public class Main
         Book xBook;
 
         Book[] books;
-        Biography[] biographies;
 
         orwellName = new Name("George", "Orwell");
         leeName = new Name("Harper", "Lee");
@@ -226,18 +225,24 @@ public class Main
         {
             if (books[i].compareTo(books[i + 1]) > 0)
             {
-                System.out.println("\"" + books[i].getBookTitle() + "\" by " + books[i].getAuthor().getName().getFullName() +
-                        " is older than \"" + books[i + 1].getBookTitle() + "\" by " + books[i + 1].getAuthor().getName().getFullName());
+                System.out.println("\"" + books[i].getBookTitle() + "\" by "
+                                           + books[i].getAuthor().getName().getFullName() + " is older than \""
+                                           + books[i + 1].getBookTitle() + "\" by "
+                                           + books[i + 1].getAuthor().getName().getFullName());
             }
             else if (books[i].compareTo(books[i + 1]) < 0)
             {
-                System.out.println("\"" + books[i].getBookTitle() + "\" by " + books[i].getAuthor().getName().getFullName()
-                        + " is newer than \"" + books[i + 1].getBookTitle() + "\" by " + books[i + 1].getAuthor().getName().getFullName());
+                System.out.println("\"" + books[i].getBookTitle() + "\" by "
+                                           + books[i].getAuthor().getName().getFullName() + " is newer than \""
+                                           + books[i + 1].getBookTitle() + "\" by "
+                                           + books[i + 1].getAuthor().getName().getFullName());
             }
             else
             {
-                System.out.println("\"" + books[i].getBookTitle() + "\" by " + books[i].getAuthor().getName().getFullName() +
-                        " was published the same year as \"" + books[i + 1].getBookTitle() + "\" by " + books[i + 1].getAuthor().getName().getFullName());
+                System.out.println("\"" + books[i].getBookTitle() + "\" by "
+                                           + books[i].getAuthor().getName().getFullName()
+                                           + " was published the same year as \"" + books[i + 1].getBookTitle()
+                                           + "\" by " + books[i + 1].getAuthor().getName().getFullName());
             }
         }
 
@@ -246,15 +251,17 @@ public class Main
         {
             if (books[i] instanceof Biography)
             {
-                if (books[i].equals(books[i + 1]) == true)
+                if (books[i].equals(books[i + 1]))
                 {
-                    System.out.println(((Biography)books[i]).getSubject() + "\'s biography subject is the same as"
-                                               + ((Biography)books[i + 1]).getSubject() + "\'s biography subject.");
+                    System.out.printf("%s's subject is the same as to %s's subject\n",
+                                      ((Biography) books[i]).getSubject(),
+                                      ((Biography) books[i + 1]).getSubject());
                 }
                 else
                 {
-                    System.out.println(((Biography) books[i]).getSubject() + "\'s biography subject is different to "
-                                               + ((Biography)books[i + 1]).getSubject() + "\'s biography subject.");
+                    System.out.printf("%s's subject is different to %s's subject\n",
+                                       ((Biography) books[i]).getSubject(),
+                                       ((Biography) books[i + 1]).getSubject());
                 }
             }
         }
