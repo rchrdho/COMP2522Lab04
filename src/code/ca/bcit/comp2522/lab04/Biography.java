@@ -1,5 +1,7 @@
 package ca.bcit.comp2522.lab04;
 
+import java.util.Objects;
+
 /**
  * The {@code Biography} class represents a biography, which is a specific type of book that
  * focuses on the life of a particular subject. It extends the {@code Book} class and adds a subject field.
@@ -77,20 +79,20 @@ public class Biography extends Book
             return false;
         }
 
-        if (!(that instanceof Biography))
-        {
-            return false;
-        }
-
-        if (that == this)
+        if (this == that)
         {
             return true;
         }
 
-        final Biography thatBio;
-        thatBio = (Biography) that;
+        if (that instanceof Biography)
+        {
+            final Biography thatBio;
+            thatBio = (Biography) that;
 
-        return this.getSubject().equals(thatBio.getSubject());
+            return this.getSubject().equals(thatBio.getSubject());
+        }
+
+        return false;
     }
 
     /**
@@ -100,6 +102,6 @@ public class Biography extends Book
     @Override
     public int hashCode()
     {
-        return this.getSubject().hashCode();
+        return Objects.hashCode(this.getSubject());
     }
 }

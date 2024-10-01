@@ -151,7 +151,7 @@ abstract class Person implements Printable,
 
         return  this.getName().equals(thatPerson.getName()) &&
                 this.getBirthDate().equals(thatPerson.getBirthDate()) &&
-                (Objects.equals(deathDate, thatPerson.deathDate));
+                (Objects.equals(this.getDeathDate(), thatPerson.getDeathDate()));
     }
 
     /**

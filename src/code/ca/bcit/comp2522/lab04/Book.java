@@ -1,5 +1,7 @@
 package ca.bcit.comp2522.lab04;
 
+import java.util.Objects;
+
 /**
  * The {@code Book} class represents a book with a title, author, and year of publication.
  * This class implements {@code Comparable<Book>} to allow comparison based on the year of publication,
@@ -128,14 +130,14 @@ public class Book implements Comparable<Book>,
      * Checks if this book is equal to another object.
      * Two books are considered equal if they have the same title, author, and year of publication.
      *
-     * @param that the object to be compared for equality
+     * @param that          the object to be compared for equality
      * @return {@code true} if the given object is a {@code Book} with the same title, author, and year;
      * {@code false} otherwise
      */
     @Override
     public boolean equals(final Object that)
     {
-        if (!(that instanceof Book))
+        if (that == null)
         {
             return false;
         }
@@ -145,13 +147,30 @@ public class Book implements Comparable<Book>,
             return true;
         }
 
-        final Book thatBook;
+        if (that instanceof Book)
+        {
+            final Book thatBook;
 
-        thatBook = (Book) that;
+            thatBook = (Book) that;
 
-        return this.bookTitle.equals(thatBook.bookTitle) &&
-                this.yearPublished == thatBook.yearPublished &&
-                this.author.equals(thatBook.author);
+            return this.getBookTitle().equals(thatBook.getBookTitle()) &&
+                    this.getYearPublished() == thatBook.getYearPublished() &&
+                    this.getAuthor().equals(thatBook.getAuthor());
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns an int based on the same instance fields used in equals.
+     * @return int hashcode made of Book title, year published, author name.
+     */
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(this.getBookTitle(),
+                            this.getYearPublished(),
+                            this.getAuthor());
     }
 
     /**
