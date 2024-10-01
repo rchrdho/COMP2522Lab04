@@ -130,6 +130,11 @@ abstract class Person implements Printable,
     @Override
     public boolean equals(final Object that)
     {
+        if (that == null)
+        {
+            return false;
+        }
+
         if (!(that instanceof Person))
         {
             return false;
@@ -140,7 +145,9 @@ abstract class Person implements Printable,
             return true;
         }
 
-        Person thatPerson = (Person) that;
+        final Person thatPerson;
+
+        thatPerson = (Person) that;
 
         return  this.getName().equals(thatPerson.getName()) &&
                 this.getBirthDate().equals(thatPerson.getBirthDate()) &&

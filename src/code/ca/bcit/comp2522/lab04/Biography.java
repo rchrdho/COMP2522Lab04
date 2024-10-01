@@ -32,6 +32,7 @@ public class Biography extends Book
                      throws IllegalArgumentException
     {
         super(title, author, yearPublished);
+
         validateSubject(subject);
         this.subject = subject;
     }
@@ -40,7 +41,7 @@ public class Biography extends Book
      * Validates the subject of the biography.
      * The subject must not be null or empty.
      *
-     * @param subject the subject of the biography
+     * @param subject                   the subject of the biography
      * @throws IllegalArgumentException if the subject is null or empty
      */
     private static void validateSubject(final String subject)
@@ -64,18 +65,41 @@ public class Biography extends Book
      * Compares this biography to another object for equality.
      * Two biographies are considered equal if they have the same subject.
      *
-     * @param that the object to be compared for equality
-     * @return {@code true} if the specified object is a {@code Biography} with the same subject,
+     * @param that           the object to be compared for equality
+     * @return {@code true}  if the specified object is a {@code Biography} with the same subject,
      * {@code false} otherwise
      */
     @Override
     public boolean equals(final Object that)
     {
+        if (that == null)
+        {
+            return false;
+        }
+
         if (!(that instanceof Biography))
         {
             return false;
         }
 
-        return this.getSubject().equals(((Biography) that).getSubject());
+        if (that == this)
+        {
+            return true;
+        }
+
+        final Biography thatBio;
+        thatBio = (Biography) that;
+
+        return this.getSubject().equals(thatBio.getSubject());
+    }
+
+    /**
+     * Returns an int based on the same instance fields used in equals.
+     * @return int hashcode made of Biography's subject
+     */
+    @Override
+    public int hashCode()
+    {
+        return this.getSubject().hashCode();
     }
 }
