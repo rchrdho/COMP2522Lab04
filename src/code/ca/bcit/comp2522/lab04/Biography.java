@@ -31,7 +31,6 @@ public class Biography extends Book
                      final Author author,
                      final int    yearPublished,
                      final String subject)
-                     throws IllegalArgumentException
     {
         super(title, author, yearPublished);
 
