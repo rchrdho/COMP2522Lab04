@@ -48,7 +48,7 @@ public class Biography extends Book
      */
     private static void validateSubject(final String subject)
     {
-        if (subject == null || subject.trim().isEmpty())
+        if(subject == null || subject.trim().isEmpty())
         {
             throw new IllegalArgumentException("Subject cannot be null or empty");
         }
@@ -74,17 +74,17 @@ public class Biography extends Book
     @Override
     public boolean equals(final Object that)
     {
-        if (that == null)
+        if(that == null)
         {
             return false;
         }
 
-        if (this == that)
+        if(this == that)
         {
             return true;
         }
 
-        if (that instanceof Biography)
+        if(that instanceof Biography)
         {
             final Biography thatBio;
             thatBio = (Biography) that;

@@ -65,7 +65,7 @@ abstract class Person implements Printable,
         sb.append(String.format("Name: %s\n", this.name.getFullName()));
         sb.append(String.format("Birth date: %s\n", this.birthDate));
 
-        if (this.deathDate != null)
+        if(this.deathDate != null)
         {
             sb.append(String.format("Death date: %s\n", this.deathDate));
         }
@@ -83,7 +83,7 @@ abstract class Person implements Printable,
 
         sb = new StringBuilder();
 
-        if (this.getDeathDate() != null)
+        if(this.getDeathDate() != null)
         {
             sb.append(String.format("Death date: %s\n", this.deathDate));
         }
@@ -130,17 +130,17 @@ abstract class Person implements Printable,
     @Override
     public boolean equals(final Object that)
     {
-        if (that == null)
+        if(that == null)
         {
             return false;
         }
 
-        if (!(that instanceof Person))
+        if(!(that instanceof Person))
         {
             return false;
         }
 
-        if (this == that)
+        if(this == that)
         {
             return true;
         }

@@ -183,17 +183,17 @@ public class Main
 
         System.out.println("Authors compared by birth years");
 
-        for (int i = 0; i < authors.length - 1; ++i)
+        for(int i = 0; i < authors.length - 1; ++i)
         {
-            for (int j = authors.length - 1; j > i; --j)
+            for(int j = authors.length - 1; j > i; --j)
             {
-                if (authors[i].compareTo(authors[j]) > 0)
+                if(authors[i].compareTo(authors[j]) > 0)
                 {
                     System.out.printf("%s is older than %s.\n",
                             authors[i].getName().getFullName(),
                             authors[j].getName().getFullName());
                 }
-                else if (authors[i].compareTo(authors[j]) < 0)
+                else if(authors[i].compareTo(authors[j]) < 0)
                 {
                     System.out.printf("%s is younger than %s.\n",
                             authors[i].getName().getFullName(),
@@ -209,28 +209,28 @@ public class Main
         }
 
         System.out.println("\nBook display() calls");
-        for (Book book : books)
+        for(Book book : books)
         {
             book.display();
         }
 
         System.out.println("Book backward() calls");
-        for (Book book : books)
+        for(Book book : books)
         {
             book.backward();
         }
 
         System.out.println("Compare Books with polymorphism");
-        for (int i = 0; i < books.length - 1; ++i)
+        for(int i = 0; i < books.length - 1; ++i)
         {
-            if (books[i].compareTo(books[i + 1]) > 0)
+            if(books[i].compareTo(books[i + 1]) > 0)
             {
                 System.out.println("\"" + books[i].getBookTitle() + "\" by "
                                            + books[i].getAuthor().getName().getFullName() + " is older than \""
                                            + books[i + 1].getBookTitle() + "\" by "
                                            + books[i + 1].getAuthor().getName().getFullName());
             }
-            else if (books[i].compareTo(books[i + 1]) < 0)
+            else if(books[i].compareTo(books[i + 1]) < 0)
             {
                 System.out.println("\"" + books[i].getBookTitle() + "\" by "
                                            + books[i].getAuthor().getName().getFullName() + " is newer than \""
@@ -247,11 +247,11 @@ public class Main
         }
 
         System.out.println("\nBiography compare subject");
-        for (int i = 0; i < books.length - 1; ++i)
+        for(int i = 0; i < books.length - 1; ++i)
         {
-            if (books[i] instanceof Biography)
+            if(books[i] instanceof Biography)
             {
-                if (books[i].equals(books[i + 1]))
+                if(books[i].equals(books[i + 1]))
                 {
                     System.out.printf("%s's subject is the same as to %s's subject\n",
                                       ((Biography) books[i]).getSubject(),

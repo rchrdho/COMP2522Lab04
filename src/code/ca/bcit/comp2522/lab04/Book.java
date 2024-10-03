@@ -57,7 +57,7 @@ public class Book implements Comparable<Book>,
      */
     private void validateTitle(final String title)
     {
-        if (title == null || title.isBlank() || title.length() >= MAX_TITLE_LENGTH)
+        if(title == null || title.isBlank() || title.length() >= MAX_TITLE_LENGTH)
         {
             throw new IllegalArgumentException("Invalid title entry");
         }
@@ -71,7 +71,7 @@ public class Book implements Comparable<Book>,
      */
     private void validateAuthor(final Author author)
     {
-        if (author == null)
+        if(author == null)
         {
             throw new IllegalArgumentException("Invalid author entry");
         }
@@ -85,7 +85,7 @@ public class Book implements Comparable<Book>,
      */
     private void validateYearPublished(final int yearPublished)
     {
-        if (yearPublished < MIN_YEAR || yearPublished > CURRENT_YEAR)
+        if(yearPublished < MIN_YEAR || yearPublished > CURRENT_YEAR)
         {
             throw new IllegalArgumentException("Invalid year, outside of range");
         }
@@ -132,17 +132,17 @@ public class Book implements Comparable<Book>,
     @Override
     public boolean equals(final Object that)
     {
-        if (that == null)
+        if(that == null)
         {
             return false;
         }
 
-        if (this == that)
+        if(this == that)
         {
             return true;
         }
 
-        if (that instanceof Book)
+        if(that instanceof Book)
         {
             final Book thatBook;
 

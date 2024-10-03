@@ -152,7 +152,7 @@ public class Date implements Printable
      */
     private static void validateYear(final int year) throws IllegalArgumentException
     {
-        if (year < VALID_YEAR_MIN || year > CURRENT_YEAR)
+        if(year < VALID_YEAR_MIN || year > CURRENT_YEAR)
         {
             throw new IllegalArgumentException("Year: " + year + " must be between 1- 2024");
         }
@@ -163,7 +163,7 @@ public class Date implements Printable
      */
     private static void validateMonth(final int month) throws IllegalArgumentException
     {
-        if (month < MONTH_MIN || month > MONTH_MAX)
+        if(month < MONTH_MIN || month > MONTH_MAX)
         {
             throw new IllegalArgumentException("Month: " + month + " must be between 1- 12");
         }
@@ -176,7 +176,7 @@ public class Date implements Printable
                                     final int month,
                                     final int year) throws IllegalArgumentException
     {
-        if (day < DAY_MIN || day > getDaysInMonth(month, year))
+        if(day < DAY_MIN || day > getDaysInMonth(month, year))
         {
             throw new IllegalArgumentException("Day: " + day + " doesn't exist for month " + month
                     + " in year " + year);
@@ -219,7 +219,7 @@ public class Date implements Printable
                 return MONTH_DAYS_30;
 
             case FEBRUARY:
-                if (isLeapYear(year))
+                if(isLeapYear(year))
                 {
                     return LONG_FEBRUARY;
                 }
@@ -328,15 +328,15 @@ public class Date implements Printable
 
         weekCode = 0;
 
-        if (isLeapYear(this.year) && (this.month == JANUARY || this.month == FEBRUARY))
+        if(isLeapYear(this.year) && (this.month == JANUARY || this.month == FEBRUARY))
         {
             weekCode += WEEK_CODE_LEAP_YEAR_ADJUSTOR;
         }
-        if (this.year <= MAX_YEAR_1800S && this.year >= MIN_YEAR_1800S)
+        if(this.year <= MAX_YEAR_1800S && this.year >= MIN_YEAR_1800S)
         {
             weekCode += WEEK_CODE_1800S_ADJUSTOR;
         }
-        if (this.year <= MAX_YEAR_2000S && this.year >= MIN_YEAR_2000S)
+        if(this.year <= MAX_YEAR_2000S && this.year >= MIN_YEAR_2000S)
         {
             weekCode += WEEK_CODE_2000S_ADJUSTOR;
         }
