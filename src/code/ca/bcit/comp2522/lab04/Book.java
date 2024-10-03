@@ -22,7 +22,7 @@ public class Book implements Comparable<Book>,
 {
     private static final int MAX_TITLE_LENGTH = 100;
     private static final int CURRENT_YEAR     = 2024;
-    private static final int MIN_YEAR         = 868;
+    private static final int MIN_YEAR         = 869;
 
     private final String bookTitle;
     private final Author author;
@@ -35,12 +35,10 @@ public class Book implements Comparable<Book>,
      * @param title         the title of the book (must be non-null, non-blank, and less than 100 characters)
      * @param author        the author of the book (must be non-null)
      * @param yearPublished the year the book was published (must be between 868 and the current year)
-     * @throws IllegalArgumentException if any of the validation checks fail
      */
     public Book(final String title,
                 final Author author,
                 final int    yearPublished)
-                throws IllegalArgumentException
     {
         validateTitle(title);
         validateYearPublished(yearPublished);
@@ -56,7 +54,6 @@ public class Book implements Comparable<Book>,
      * The title must not be null, blank, or exceed the maximum allowed length.
      *
      * @param title the title to be validated
-     * @throws IllegalArgumentException if the title is invalid
      */
     private void validateTitle(final String title)
     {
@@ -71,7 +68,6 @@ public class Book implements Comparable<Book>,
      * The author must not be null.
      *
      * @param author the author to be validated
-     * @throws IllegalArgumentException if the author is null
      */
     private void validateAuthor(final Author author)
     {
@@ -86,7 +82,6 @@ public class Book implements Comparable<Book>,
      * The year must be between 868 and the current year.
      *
      * @param yearPublished the year to be validated
-     * @throws IllegalArgumentException if the year is outside the valid range
      */
     private void validateYearPublished(final int yearPublished)
     {

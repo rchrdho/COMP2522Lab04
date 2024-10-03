@@ -36,7 +36,6 @@ public class Author extends Person
      * validates genre is not null or empty.
      */
     private static void validateGenre(final String genre)
-                                      throws IllegalArgumentException
     {
         if (genre == null || genre.trim().isBlank())
         {
